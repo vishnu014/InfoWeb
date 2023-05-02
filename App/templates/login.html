@@ -1,0 +1,66 @@
+<html>
+    <head>
+<link rel="stylesheet" href="static/assets/css/login.css">
+    </head>
+    <body>
+        <div class="container">
+            <h2 class="login-title">Log in</h2>
+        
+            <form class="login-form">
+       
+        
+              <div>
+                <label for="email">Email </label>
+                <input
+                       id="email"
+                       type="email"
+                       placeholder="me@example.com"
+                       name="email"
+                       required
+                       />
+              </div>
+        
+              <div>
+                <label for="password">Password </label>
+                <input
+                       id="password"
+                       type="password"
+                       placeholder="password"
+                       name="password"
+                       required
+                       />
+              </div>
+        
+              <button class="btn btn--form" onclick="LoginSubmit()" type="button" value="Log in">
+                Log in
+              </button>
+              
+            </form>
+            
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+          function LoginSubmit() {
+            var email=$('#email').val()
+            var password=$('#password').val()
+            
+            $.ajax({
+              type:"POST",
+              url: "{% url 'loginsubmit' %}",
+              data:{email:email,password:password,csrfmiddlewaretoken:"{{ csrf_token }}"},
+              dataType:"json",
+              success: function(response){
+
+                if(response.pass){
+                  window.location.href="{% url 'dashboard' %}"
+                  console.log('login')
+                }
+                else{
+                  console.log('fail')
+                }
+              }
+            })
+          }
+        </script>
+    </body>
+</html>
