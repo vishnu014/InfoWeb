@@ -5,4 +5,5 @@ from django.db import models
 class Register(models.Model):
     email=models.EmailField(max_length=100)
     password=models.TextField(max_length=100)
+    username=models.CharField(max_length=100)
     

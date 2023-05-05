@@ -79,7 +79,9 @@
         <h1>Sign Up</h1>
         <p>Please fill in this form to create an account.</p>
         <hr>
-    
+        <label for="username"><b>Username</b></label>
+        <input id="username" type="text" placeholder="Enter username" name="username" required>
+
         <label for="email"><b>Email</b></label>
         <input id="email" type="text" placeholder="Enter Email" name="email" required>
     
@@ -104,7 +106,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       function RegisterSubmit() {
-
+        var username=$('#username').val()
         var email=$('#email').val()
         var password=$('#password').val()
         var password2=$('#password2').val()
@@ -119,7 +121,7 @@
         $.ajax({
           type: "POST",
           url: "{% url 'registersubmit' %}",
-          data:{ email:email,password:password,csrfmiddlewaretoken:"{{ csrf_token }}"},
+          data:{ username:username,email:email,password:password,csrfmiddlewaretoken:"{{ csrf_token }}"},
           dataType: "json",
           success: function (response) {
 
