@@ -8,5 +8,6 @@ class Blog(models.Model):
     thumbnail=models.ImageField(upload_to='media/thumbnail')
 
 class BlogContents(models.Model):
-    content=models.CharField(max_length=200)
-    content_image=models.ImageField(upload_to="media/content_image")
+    blog_id=models.IntegerField(null=True)
+    content=models.CharField(max_length=200,null=True)
+    content_image=models.ImageField(upload_to="media/content_image",null=True)

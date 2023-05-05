@@ -16,24 +16,18 @@ def AddBlogPage(request):
 def AddBlog(request):
     title= request.POST.get('title')
     image=request.FILES.get('image')
-    # content=request.POST.getlist('content')
-    # content_image=request.FILES.getlist('content_image[]')
-    content_dic=json.loads(request.POST.get('content_dic'))
-
-  
-    # print(image)
     
-    Blog.objects.create(title=title,thumbnail=image)
+    content=request.POST.getlist('content_text')
+    content_image=request.FILES.getlist('content_image')
+    
+   
+    obj=Blog.objects.create(title=title,thumbnail=image)
 
-    for i in content_dic:
-        print(i)
+    for i in range(0,len(content)):
+        i_content=content[i]
+        i_content_image=content_image[i]        
+        BlogContents.objects.create(content=i_content,content_image=i_content_image,blog_id=obj.id)
         
-        
-        
-
-        # BlogContents.create(content=content,content_image=content_image)
-        # # content_image=BlogContents(image=content_image[i], content=content[i])
-        # BlogContents.save()
         
         
     return JsonResponse({'status': 'Upload Done'})
